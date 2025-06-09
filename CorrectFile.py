@@ -4,7 +4,7 @@ import pandas as pd
 count = 1
 
 it_sector_tickers = [
-    "AAPL", "MSFT", "GOOG"
+    "AAPL"
 ]
 
 
@@ -30,8 +30,8 @@ dfs = []
 
 # Проходим по каждому файлу в папке
 for filename in os.listdir(folder_path):
-    print('Step: ', count)
-    count += 1 
+    print(f'Step: {count}, name: {filename[:-10]}')
+    count += 1
     # Проверяем расширение файла (.csv) и наличие любого тикера в имени файла
     if filename.endswith('.csv') and any(ticker in filename for ticker in it_sector_tickers):
         # Чтение CSV-файла
@@ -39,7 +39,7 @@ for filename in os.listdir(folder_path):
         df = pd.read_csv(file_path)
 
         # Добавление новой колонки с именем файла
-        df['filename'] = filename
+        df['filename'] = filename[:-9]
 
         # Добавляем в общий список
         dfs.append(df)
